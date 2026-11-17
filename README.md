@@ -104,7 +104,7 @@ The GitHub example is an independent demonstration, **not a communication sent b
 
 ## Challenge entry
 
-Prepared for the [Hyper Elements Template Challenge](https://github.com/hyper-elements/hyper-elements/discussions/209). The kit addresses originality, design, practical value and effective library use through a source-preserving communications workflow. A public repository, repository star and official discussion submission are still required; this local build does not claim they have happened. No prize or acceptance is guaranteed.
+Prepared for the [Hyper Elements Template Challenge](https://github.com/hyper-elements/hyper-elements/discussions/209). The kit addresses originality, design, practical value and effective library use through a source-preserving communications workflow. Published source and screenshots are in this public repository. The official repository was starred and the entry was submitted as [discussion #252](https://github.com/hyper-elements/hyper-elements/discussions/252). No prize or acceptance is guaranteed.
 
 ## License
 
