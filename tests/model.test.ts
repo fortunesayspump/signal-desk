@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {parseNotice,nextUpdate,stamp,missing} from '../src/model.js';
+const example=JSON.parse(await readFile('data/github-2024.json','utf8'));const empty=JSON.parse(await readFile('data/empty.json','utf8'));
+test('source-backed example validates and stays explicitly historical',()=>{const n=parseNotice(example);assert.equal(n.state,'resolved');assert.match(nextUpdate(n),/Historical/);assert.equal(n.events.length,4)});
+test('empty record never implies operational or resolved status',()=>{const n=parseNotice(empty);assert.equal(n.state,'draft');assert.equal(missing(n).length,5);assert.equal(nextUpdate(n),'Not announced')});
+test('non-draft requires a source and substantive content',()=>{assert.throws(()=>parseNotice({...empty,state:'investigating'}),/Non-draft/)});
+test('reject unsafe source URLs',()=>{assert.throws(()=>parseNotice({...example,source:{...example.source,url:'javascript:alert(1)'}}),/HTTPS/)});
+test('reject path traversal in output ID',()=>{assert.throws(()=>parseNotice({...example,id:'../../test'}),/id must/)});
+test('timezone is explicit and output is UTC',()=>{assert.throws(()=>parseNotice({...example,nextUpdate:'2026-11-17T12:00:00'}),/ISO/);assert.match(stamp('2024-10-11T17:31:00Z'),/17:31 UTC/)});
+test('event order is validated',()=>{assert.throws(()=>parseNotice({...example,events:[...example.events].reverse()}),/chronological/)});
+test('change lifecycle does not borrow incident meanings',()=>{assert.throws(()=>parseNotice({...example,kind:'change'}),/Changes use/);assert.equal(parseNotice({...empty,kind:'change'}).kind,'change')});
+test('missing next update never invents a deadline',()=>assert.equal(nextUpdate({...example,state:'investigating',source:{...example.source,historical:false}}),'Not announced'));
+test('summary and title must fit the bounded image contract',()=>{assert.throws(()=>parseNotice({...example,title:'x'.repeat(101)}),/100 characters/);assert.throws(()=>parseNotice({...example,summary:'x'.repeat(241)}),/240/)});
+test('source text is bounded and timestamps include the year',()=>{assert.throws(()=>parseNotice({...example,source:{...example.source,label:'x'.repeat(121)}}),/120/);assert.match(stamp(example.events[0].at),/2024/)});

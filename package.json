@@ -1,0 +1,32 @@
+{
+  "name": "signal-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Source-linked incident communications in four formats, powered by Hyper Elements",
+  "scripts": {
+    "build": "node --import tsx src/build.tsx",
+    "render": "node --import tsx src/build.tsx",
+    "dev": "node --import tsx src/server.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hyper-elements/email-clients": "^0.4.16",
+    "@hyper-elements/react": "0.4.8",
+    "@react-pdf/renderer": "^4.9.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "satori": "^0.33.5"
+  },
+  "devDependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.0",
+    "@fontsource/ibm-plex-sans": "^5.2.0",
+    "@hyper-elements/cli": "^0.2.9",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

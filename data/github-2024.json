@@ -1,0 +1,18 @@
+{
+  "id":"github-2024-10-11",
+  "kind":"incident",
+  "state":"resolved",
+  "organization":"GitHub",
+  "title":"DNS disruption affected developer services",
+  "summary":"A DNS failure followed a database migration at one site. Temporary DNS capacity restored the infrastructure; code search recovered later.",
+  "impact":"Copilot completions degraded for 4% of users. A quarter of Actions workflow users saw delays over five minutes. Code search failed for about four hours.",
+  "action":"The published report does not specify a customer action.",
+  "nextUpdate":null,
+  "source":{"label":"GitHub Availability Report · October 2024","url":"https://github.blog/news-insights/company-news/github-availability-report-october-2024/","historical":true},
+  "events":[
+    {"at":"2024-10-11T17:31:00Z","label":"Customer impact begins","detail":"First customer impact, approximately."},
+    {"at":"2024-10-11T20:52:00Z","label":"Temporary DNS deployed","detail":"The team began its revised mitigation."},
+    {"at":"2024-10-11T22:16:00Z","label":"DNS healthy","detail":"DNS infrastructure recovered."},
+    {"at":"2024-10-12T01:11:00Z","label":"Code search restored","detail":"Remaining code search issues resolved."}
+  ]
+}
